@@ -1,0 +1,6 @@
+# This file contains the name and quantity of each fruit that you have.
+
+Apple 5
+Orange 10
+Banana 3
+Kiwi 15
