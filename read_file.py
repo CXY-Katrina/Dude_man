@@ -37,8 +37,8 @@ def list_of_list(f):
     # where is the read cursor? at the beginning of the 3rd line
     output = []
     for line in f:
-        # intput: "Apple 5\n"
-        # output: ["Apple","5"]
+        # intput: "Apple 5\n" - string
+        # output: ["Apple","5"] - list
         element = line.split() # by default, split based on whitespaces " ", "     ", tab, a new line
                             # skip all the whitespaces
                             # the reture value of split() is a list
@@ -47,15 +47,68 @@ def list_of_list(f):
         output.append(element) # append is a list method
     return output
 
-with open("fruits.txt") as f:
-    print(list_of_list(f))
+# with open("fruits.txt") as f:
+#     print(list_of_list(f))
 
 # 3. sorted_fruit_quantity(f):
 # This function should return a list containing the two highest quantity, 
 # in descending order, for all fruits.
 # [15, 10]
 
+# Define a function:
+# 1. header of the function
+# def function_name(input_name):
+# 2. the description (We don't need to have it)
+# 3. the body of the function
+# Everything inside the body of the function should be indented
+
+def sorted_fruit_quantity(f):
+    """
+    This function should return a list containing the two highest quantity, 
+    in descending order, for all fruits.
+    """
+    # skip the header of the file
+    move_cursor(f)
+    # put all the quantities into a list
+    # expected output: [5, 10, 3, 15]
+        # read the file line by line
+    output = []
+    for line in f:
+        line_list = line.split() # ["Apple","5"]
+        output.append(int(line_list[1]))
+    # sort the list in descending order
+    # expected output: [15, 10, 5, 3]
+    output.sort(reverse=True)
+    # only select the highest two quantities in the list and return them
+    # expected output: [15, 10]
+    # slicing
+    # Hint: ending pos is the index of the first element that I don't want to include
+    # in the final result
+    return output[0:2]
+
+# '5' vs 5
+# type
+# '5' is a string
+# 5 is a number
+
+# print('5'>'25') # expected output: false
+                # actual output: true
+# '5' > '2'-> True
+# 'apple'<'banana'->True
+# print(5 < 25)
+
+# print("cart"[0:3])
+
+# what u have: [15, 10, 5, 3]
+# what I want: [15, 10]
+
+with open("fruits.txt") as f:
+    print(sorted_fruit_quantity(f))
+
 # 4. create_dict(f)
 # This function should return a dictionary where key is the name of the fruit 
 # and value is the quantity.
 # {"Apple": 5, "Orange": 10, "Banana": 3, "Kiwi": 15}
+
+# git vs github
+# control the logic vs UI of git
