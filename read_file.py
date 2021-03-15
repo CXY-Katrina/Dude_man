@@ -102,13 +102,55 @@ def sorted_fruit_quantity(f):
 # what u have: [15, 10, 5, 3]
 # what I want: [15, 10]
 
-with open("fruits.txt") as f:
-    print(sorted_fruit_quantity(f))
+# with open("fruits.txt") as f:
+#     print(sorted_fruit_quantity(f))
 
 # 4. create_dict(f)
 # This function should return a dictionary where key is the name of the fruit 
 # and value is the quantity.
 # {"Apple": 5, "Orange": 10, "Banana": 3, "Kiwi": 15}
 
+def create_dict(f):
+    # skip the header of the file
+    move_cursor(f)
+
+    output = {}
+   
+    # for loop - go through each line of the file
+    for line in f:
+        # "Apple 5\n" -> {"Apple": 5}
+        # get rid of the new line character (\n)
+        line = line.strip()
+        # split "Apple 5" into two strings "Apple" "5"
+        line_list = line.split() # ["Apple","5"]
+        # convert "5" into an integer 5
+        # the second element of line_list - line_list[1]
+        quantity = int(line_list[1])
+        # add this key value pair to the output
+        # the name of the fruits - variable 
+        # Q: how to get the first element of variable line_list?
+        # A: line_list[0]
+        output[line_list[0]] = quantity
+    return output
+
+with open("fruits.txt") as f:
+    print(create_dict(f))
+
 # git vs github
 # control the logic vs UI of git
+
+# d = {}
+# d["Apple"] = 5
+# print(d)
+
+# strip()
+# delete all the leading and trailing characters, by default, it will delete spaces
+# print("      ap ple         ".strip())
+
+# strip(string)
+# txt = ",,,,,rrttgg.....banana....rrr"
+# x = txt.strip(",.grtn") # a set of characters
+# print(x)
+
+# l = ["abc", "5"]
+# print(l[1])
