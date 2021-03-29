@@ -74,18 +74,23 @@ def create_dict(f):
         # split the elements based on whitespaces
         # get the name of the metal and the weight
         # put the name and weight pair into a dictionary
-        for line in f:
-            line_list = line.split()    # the format of line_list [name, number, weights]
-            # indexing
-            name = line_list[0]
-            # Homework: get the third element of line_list
-            # weights = 
-            # To add a key-value pair into a dictionary:
-            # dictionary_name[key] = value
-            # in our case, key is the name, value is the weights
+        # f file
+    for line in f:
+        # line string
+        line_list = line.split()    # the format of line_list [name, number, weights]
+        # indexing
+        # line_list = ["beryllium", "4", "9.012"]
+        name = line_list[0] # string "beryllium"
+        # Homework: get the third element of line_list
+        # the index of weights is 2
+        weights = line_list[2] # string "9.012"
+        # To add a key-value pair into a dictionary:
+        output[name] = weights
+        # in our case, key is the name, value is the weights
 
     # step 4: return the dictionary
-
+    # {beryllium: 9.012, magnesium: 24.305, calcium: 20.078}
+    return output
 
 if __name__ == '__main__':
     # put this file in your directory along with this lab file
@@ -107,4 +112,8 @@ if __name__ == '__main__':
     
     with open(filename) as f:
         print(sorted_atomic_weights(f))
+        print('--------------------------------')
+    
+    with open(filename) as f:
+        print(create_dict(f))
         print('--------------------------------')
