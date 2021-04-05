@@ -45,10 +45,32 @@ def get_pokemon_stats():
     # open the file
     filename = const.DATA_FILENAME
     with open(filename) as f:
-    # get rid of the header
-    # for loop each line in the file
-    # get all the fields
-    # put them into data structures
+        # get rid of the header
+        header_dict = parse_header(f)
+        # for loop each line in the file
+        for line in f:
+            line_list = line.strip().split(const.SEP)
+
+            # get all the fields
+            pokemon_name = line_list[header_dict['pokemon']]
+            species = int(line_list[header_dict['species_id']])
+            height = float(line_list[header_dict['height']])
+            weight = float(line_list[header_dict['weight']])
+            type_1 = line_list[header_dict['type_1']]
+            type_2 = line_list[header_dict['type_2']]
+            url_image = line_list[header_dict['url_image']]
+            generation_id = int(line_list[header_dict['generation_id']])
+            evolves_from_species_id = line_list[header_dict['evolves_from_species_id']]
+            # put them into data structures
+            name_to_stats[pokemon_name] = (pokemon_name, species, height, weight, type_1, type_2, url_image, generation_id, evolves_from_species_id)
+            id_to_name[species] = pokemon_name
+            names.append(pokemon_name)
+            if type_1 not in pokemon_by_type:
+                pokemon_by_type[type_1] = []
+            if type_2 not in pokemon_by_type:
+                pokemon_by_type[type_2] = []
+            pokemon_by_type[type_1].append(pokemon_name)
+            pokemon_by_type[type_2].append(pokemon_name)
 
     # Write your code above.
 
@@ -105,3 +127,5 @@ if __name__ == '__main__':
     with open(filename) as f:
         print(parse_header(f))
         print('--------------------------------')
+    
+    get_pokemon_stats()
