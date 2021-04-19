@@ -15,7 +15,20 @@ def main():
     stats, id_to_name, names, pokemon_by_type = backend.get_pokemon_stats()
 
     # Write your code below.
-    pass
+    
+    # ask the user for a choice
+    response = get_main_choice()
+    while response != '0':
+        if response == "1":
+            name = find_pokemon_by_name(names)
+            display_stats(stats[name])
+        elif response == "2":
+            name = find_pokemon_by_id(id_to_name)
+            display_stats(stats[name])
+        elif response == "3":
+            display_pokemon_by_type(pokemon_by_type)
+        response = get_main_choice()
+    print("Goodbye!")
 
 
 def get_main_choice():
@@ -42,7 +55,12 @@ def get_main_choice():
     warning = 'Invalid choice. Please try again.'
 
     # Write your code below.
-    pass
+    # ask for users' input
+    choice = input(prompt)
+    while choice not in ['0', '1', '2', '3']:
+        print(warning)
+        choice = input(prompt)
+    return choice
 
 
 def find_pokemon_by_name(pokemon_names):
@@ -72,7 +90,18 @@ def find_pokemon_by_name(pokemon_names):
     # Hint: use the find_closest_word() function to help you out here.
 
     # Write your code below.
-    pass
+    # get the user input
+    choice = input(prompt)
+    # convert the name into lowercase
+    choice = choice.lower()
+    if choice in pokemon_names:
+        return choice
+    else:
+        while choice not in pokemon_names:
+            closest_name = find_closest_word(choice, pokemon_names)
+            print(warning.format(choice, closest_name))
+            choice = input(prompt)
+        return choice
 
 
 def find_closest_word(word_0, words):
@@ -89,7 +118,16 @@ def find_closest_word(word_0, words):
     # Hint: use the levenshtein_distance() function to help you out here.
 
     # Write your code below.
-    pass
+    min_distance = 1000000
+    closest_word = None
+    for word in words:
+        # calculate the distance between word and word_0
+        distance = levenshtein_distance(word, word_0)
+        # update the distance
+        if distance < min_distance:
+            min_distance = distance
+            closest_word = word
+    return closest_word
 
 
 def levenshtein_distance(s1, s2):
@@ -153,7 +191,13 @@ def find_pokemon_by_id(id_to_name):
     # pokemon with that id.
 
     # Write your code below.
-    pass
+    id = input(prompt)
+    # id is an integer
+    # in the range
+    while (not id.isdigit()) or (int(id) not in id_to_name):
+        print(warning)
+        id = input(prompt)
+    return id_to_name[int(id)]
 
 
 def display_stats(stats):
@@ -226,8 +270,15 @@ def display_pokemon_by_type(pokemon_by_type):
     warning = 'Unrecognized type'
 
     # Write your code below.
-    pass
-
+    t = input(prompt)
+    while t not in pokemon_types:
+        print(warning)
+        t = input(prompt)
+    print(pokemon_by_type[t])
 
 if __name__ == '__main__':
     main()
+    # print("the return value is", get_main_choice())
+    # print("the return value is", find_pokemon_by_name(["bulbasaur", "ivysaur"]))
+    # print("the return value is", find_pokemon_by_id({1: "bulbasaur", 2: "ivysaur"}))
+    # display_pokemon_by_type({"grass": ["bulbasaur"], "fire": ["ivysaur"]})
